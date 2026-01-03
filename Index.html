@@ -1,0 +1,746 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حمزة من قلب الحدث</title>
+    <!-- استدعاء خط عربي حديث -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <!-- مكتبة HLS.js -->
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
+    <!-- ========================================== -->
+    <!-- GOOGLE ADS SCRIPT PLACEHOLDER -->
+    <!-- ========================================== -->
+    <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXX" crossorigin="anonymous"></script> -->
+
+    <!-- ========================================== -->
+    <!-- GOOGLE SITE VERIFICATION -->
+    <!-- ========================================== -->
+    <meta name="google-site-verification" content="cgH228HYmbTBbEoQt_dOSHPnKYlyHGY5ywyZLxpMlDk" />
+
+    <style>
+        :root {
+            /* ألوان حمزة من قلب الحدث */
+            --primary-glow: #00f2ff;
+            --secondary-glow: #ff0055;
+            --bg-dark: #0f0c29;
+            --bg-gradient: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-main: #ffffff;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: var(--bg-gradient);
+            background-attachment: fixed;
+            color: var(--text-main);
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* --- الهيدر المتطور (Responsive) --- */
+        header {
+            padding: 10px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            backdrop-filter: blur(15px);
+            background: rgba(15, 12, 41, 0.6);
+            border-bottom: 1px solid var(--glass-border);
+            position: relative;
+            z-index: 100;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        /* --- تحسين منطقة العلامة التجارية (الشعار والزر) --- */
+        .brand-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        /* --- زر التحميل (مظهر في الموقع) --- */
+        .download-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 242, 255, 0.15);
+            border: 1px solid var(--primary-glow);
+            padding: 8px 15px;
+            border-radius: 30px;
+            font-weight: bold;
+            color: var(--primary-glow);
+            font-size: 0.9rem;
+            box-shadow: 0 0 10px rgba(0, 242, 255, 0.2);
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.3s;
+        }
+
+        .download-indicator:hover {
+            background: var(--primary-glow);
+            color: #000;
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.6);
+        }
+
+        .download-arrow {
+            font-size: 1.2rem;
+            animation: bounce-arrow 1.5s infinite;
+        }
+
+        @keyframes bounce-arrow {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(3px); }
+        }
+
+        /* --- حاوية الأيقونة والأنيميشن --- */
+        .logo-container {
+            width: 110px; /* تصغير طفيف ليتناسب مع الزر */
+            height: 110px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo-frame {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            padding: 3px;
+            background: linear-gradient(45deg, #ff0055, #00f2ff, #ff0055);
+            background-size: 300%;
+            animation: spin-glow 5s linear infinite;
+            z-index: 1;
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.3);
+        }
+
+        .logo-frame img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #0f0c29; 
+            display: block;
+            animation: float-stop 15s linear infinite;
+        }
+
+        .logo-text {
+            position: absolute;
+            z-index: 10;
+            color: white;
+            font-weight: 900;
+            font-size: 1rem; /* تصغير النص قليلاً */
+            text-align: center;
+            width: 160%;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.9);
+            pointer-events: none;
+            animation: text-cycle 15s linear infinite;
+        }
+
+        @keyframes spin-glow { 0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; } }
+
+        @keyframes float-stop {
+            0% { transform: translateY(0); } 10% { transform: translateY(-10px); } 13% { transform: translateY(0); }
+            13.5% { transform: translateY(0) scale(1); } 86.5% { transform: translateY(0) scale(1); }
+            87% { transform: translateY(0); } 95% { transform: translateY(-10px); } 100% { transform: translateY(0); }
+        }
+
+        @keyframes text-cycle {
+            0% { transform: translateY(100px) scale(0.8); opacity: 0; }
+            10% { transform: translateY(0) scale(1); opacity: 1; }
+            80% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-80px) scale(1.1); opacity: 0; }
+        }
+
+        .brand-info h1 { font-size: 1.6rem; font-weight: 900; letter-spacing: 1px; background: -webkit-linear-gradient(#fff, #aaa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .brand-info span { font-size: 0.8rem; color: rgba(255,255,255,0.6); letter-spacing: 1px; text-transform: uppercase; }
+
+        /* تنسيق الرابط لمنع التشويش وجعله متجاوب */
+        .brand-link {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: opacity 0.3s;
+        }
+        .brand-link:hover { opacity: 0.9; }
+
+        .date-display {
+            font-size: 0.85rem;
+            color: var(--primary-glow);
+            background: rgba(0,0,0,0.3);
+            padding: 6px 15px;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 242, 255, 0.2);
+            text-shadow: 0 0 10px rgba(0, 242, 255, 0.5);
+            order: 1; /* إعطاء التاريخ أولوية في الشاشات الصغيرة */
+        }
+
+        /* --- التخطيط العام --- */
+        .main-container {
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            gap: 25px;
+            padding: 20px; /* تقليل الحواشي للموبايل */
+            max-width: 1600px;
+            margin: 0 auto;
+            flex-grow: 1;
+        }
+
+        /* --- قسم المشغل --- */
+        .player-section {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            backdrop-filter: blur(4px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* نسبة 16:9 */
+            background: #000;
+        }
+
+        video {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%; outline: none;
+        }
+
+        /* شريط الأخبار بنمط نيون */
+        .breaking-news {
+            background: rgba(0,0,0,0.4);
+            display: flex;
+            align-items: center;
+            height: 50px;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .bn-label {
+            background: linear-gradient(90deg, #ff0055, #ff5e00);
+            color: white;
+            padding: 0 20px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+            z-index: 2;
+            box-shadow: 5px 0 15px rgba(255, 0, 85, 0.4);
+        }
+
+        .bn-content {
+            flex-grow: 1;
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+        }
+
+        .bn-content span {
+            display: inline-block;
+            padding-right: 100%;
+            animation: ticker 20s linear infinite;
+            font-size: 0.9rem;
+            color: #ddd;
+            text-shadow: 0 0 5px rgba(255,255,255,0.3);
+        }
+
+        /* --- قائمة القنوات --- */
+        .channels-list {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            max-height: 600px; /* تقليل الارتفاع للموبايل */
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        .list-header {
+            padding: 15px;
+            background: rgba(255,255,255,0.05);
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            border-bottom: 1px solid var(--glass-border);
+            font-size: 1rem;
+        }
+
+        .channels-scroll { overflow-y: auto; padding: 10px; }
+        
+        /* تخصيص السكرول بار */
+        .channels-scroll::-webkit-scrollbar { width: 6px; }
+        .channels-scroll::-webkit-scrollbar-track { background: rgba(255,255,255,0.02); }
+        .channels-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
+
+        .channel-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            cursor: pointer;
+            transition: all 0.3s;
+            border-radius: 12px;
+            margin-bottom: 5px;
+        }
+
+        .channel-item:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateX(-5px);
+        }
+
+        .channel-item.active {
+            background: linear-gradient(90deg, rgba(0, 242, 255, 0.15), transparent);
+            border-right: 4px solid var(--primary-glow);
+        }
+
+        .channel-logo {
+            width: 45px; height: 30px; object-fit: contain; /* تصغير الشعارات */
+            margin-left: 10px; background: rgba(255,255,255,0.1); 
+            border-radius: 6px; padding: 2px;
+        }
+
+        .channel-name { font-weight: 600; font-size: 0.9rem; color: #fff; }
+
+        /* --- تصميم مكان الإعلان --- */
+        .adsense-slot {
+            width: 100%;
+            height: 250px;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px dashed rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            text-align: center;
+            font-size: 0.8rem;
+        }
+
+        /* --- قسم RSS --- */
+        .rss-section {
+            grid-column: 1 / -1;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 20px;
+            backdrop-filter: blur(5px);
+            margin-top: 10px;
+        }
+
+        .rss-title {
+            border-right: 5px solid var(--secondary-glow);
+            padding-right: 15px;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .rss-title::before { content: '📰'; }
+
+        .rss-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .rss-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 15px;
+            padding: 15px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .rss-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.08);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            border-color: rgba(255,255,255,0.2);
+        }
+
+        .rss-source-tag {
+            background: rgba(0, 242, 255, 0.1);
+            color: var(--primary-glow);
+            font-size: 0.7rem;
+            padding: 3px 8px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+            display: inline-block;
+            font-weight: bold;
+        }
+
+        .rss-card h3 {
+            font-size: 1rem;
+            margin-bottom: 12px;
+            color: #eee;
+            line-height: 1.5;
+        }
+
+        .rss-card a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 0.85rem;
+            font-weight: bold;
+            border-bottom: 1px dashed rgba(255,255,255,0.3);
+            transition: color 0.3s;
+        }
+
+        .rss-card a:hover { color: var(--primary-glow); border-color: var(--primary-glow); }
+        .rss-meta { font-size: 0.7rem; color: #888; margin-top: 12px; display: flex; align-items: center; gap: 5px; }
+
+        footer { text-align: center; padding: 20px; color: rgba(255,255,255,0.4); font-size: 0.8rem; }
+
+        /* --- --- MEDIA QUERIES FOR MOBILE (Responsive) --- --- */
+        @media (max-width: 768px) {
+            /* 1. الهيدر للموبايل */
+            header {
+                flex-direction: column; /* ترتيب عمودي */
+                padding: 15px;
+                gap: 20px;
+                align-items: center;
+            }
+
+            /* إظهار زر التحميل */
+            .brand-wrapper {
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+                width: 100%;
+                align-items: center;
+            }
+
+            .download-indicator {
+                display: flex; /* تأكيد الظهور */
+                width: 90%;
+                justify-content: center;
+                padding: 12px;
+                font-size: 1.1rem; /* تكبير الزر للموبايل */
+                order: -1; /* جعل الزر هو العنصر الأول */
+            }
+
+            /* 2. الشعار للموبايل */
+            .logo-container {
+                width: 90px;
+                height: 90px;
+                order: 0;
+            }
+
+            .logo-text {
+                font-size: 0.8rem;
+                width: 140%;
+            }
+
+            /* 3. النصوص للموبايل */
+            .brand-info {
+                text-align: center;
+                order: 1;
+            }
+            .brand-info h1 { font-size: 1.3rem; }
+            .brand-info span { display: none; } /* إخفاء النص الفرعي لتوفير المساحة */
+
+            .date-display {
+                margin-top: 10px;
+                order: 2;
+            }
+
+            /* 4. التخطيط الرئيسي */
+            .main-container {
+                grid-template-columns: 1fr; /* عمود واحد */
+                padding: 15px;
+                gap: 15px;
+            }
+
+            /* 5. الفوتر */
+            .site-footer {
+                margin-top: 30px;
+                padding: 40px 20px;
+            }
+            .footer-content {
+                grid-template-columns: 1fr; /* عمود واحد */
+                gap: 30px;
+                text-align: center;
+            }
+        }
+
+        /* --- --- MEDIA QUERIES FOR DESKTOP (استعادة بعض القيم) --- --- */
+        @media (min-width: 769px) {
+            .download-indicator {
+                order: 0; /* العودة للترتيب الأفقي */
+                width: auto;
+            }
+            .brand-wrapper {
+                order: 0;
+                flex-direction: row;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <!-- المجموعة: زر تحميل + شعار -->
+        <div class="brand-wrapper">
+            <!-- زر التحميل (يظهر في الموبايل والديسك توب) -->
+            <a href="https://1drv.ms/u/c/577220FEF38F8D42/IQD885rqM6-OSJO_dbhX1eWYAf79X3ILnKHFKZ1WlbYP8wo" target="_blank" class="download-indicator">
+                <span class="download-arrow">⬇</span>
+                <span>حمل التطبيق من هنا</span>
+            </a>
+
+            <!-- رابط الشعار يحتوي الشعار والنص والأنيميشن -->
+            <a href="https://1drv.ms/u/c/577220FEF38F8D42/IQD885rqM6-OSJO_dbhX1eWYAf79X3ILnKHFKZ1WlbYP8wo" target="_blank" class="brand-link" title="اضغط للتحميل">
+                <div class="logo-container">
+                    <div class="logo-frame">
+                        <img src="https://z-cdn-media.chatglm.cn/files/65331a9a-1d98-4da7-9686-da2336848601.png?auth_key=1867400554-9f5caa7d39c648d7b9d28ba8f5f5373c-0-29755b9a2a79ebdaf7996708a2b0cd1e" alt="Logo">
+                    </div>
+                    <div class="logo-text">
+                        حمزة من<br>قلب الحدث
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="brand-info">
+            <h1>حمزة من قلب الحدث</h1>
+            <span>تغطية إخبارية فورية وشاملة</span>
+        </div>
+
+        <div class="date-display" id="currentDate">--/--/----</div>
+    </header>
+
+    <main class="main-container">
+        <!-- قسم الفيديو -->
+        <section class="player-section">
+            <div class="video-container">
+                <video id="videoPlayer" controls poster="https://picsum.photos/seed/darknews/1280/720.jpg"></video>
+            </div>
+            <div class="breaking-news">
+                <div class="bn-label">عاجل</div>
+                <div class="bn-content">
+                    <span id="tickerText">جاري تحميل الأخبار العاجلة...</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- قائمة القنوات -->
+        <aside class="channels-list">
+            <!-- مكان إعلان Google AdSense -->
+            <div class="adsense-slot">
+                <span>مساحة إعلانية<br>Google AdSense</span>
+            </div>
+
+            <div class="list-header">القنوات المباشرة</div>
+            <div class="channels-scroll" id="channelsContainer"></div>
+        </aside>
+
+        <!-- قسم RSS -->
+        <section class="rss-section">
+            <h2 class="rss-title">أحدث المقالات والتحليلات</h2>
+            <div class="rss-grid" id="rssContainer">
+                <div style="grid-column: 1/-1; text-align: center; padding: 30px; color: rgba(255,255,255,0.5);">
+                    <span class="loader">⏳</span> جاري الاتصال بمصادر الأخبار العالمية...
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- الفوتر -->
+    <footer>
+        &copy; 2023 حمزة من قلب الحدث - تصميم وتطوير ذكي
+    </footer>
+
+    <script>
+        // --- 1. بيانات القنوات ---
+        const m3uData = `
+        #EXTM3U
+        #EXTINF:-1 tvg-logo="https://i.ibb.co/884RcMF/aljazera.png",الجزيرة الإخبارية
+        https://live-hls-apps-aja-fa.getaj.net/AJA/index.m3u8
+
+        #EXTINF:-1 tvg-logo="https://i.ibb.co/w7wk4p0/alarabiya.png",العربية
+        https://live.alarabiya.net/alarabiapublish/alarabiya.smil/playlist.m3u8
+
+        #EXTINF:-1 tvg-logo="https://i.ibb.co/sw6tV5W/alhadath.jpg",العربية الحدث
+        https://av.alarabiya.net/alarabiapublish/alhadath.smil/playlist.m3u8
+
+        #EXTINF:-1 tvg-logo="https://i.ibb.co/fFyvbrC/skynewsar.png",سكاي نيوز عربية
+        https://stream.skynewsarabia.com/hls/sna.m3u8
+
+        #EXTINF:-1 tvg-logo="https://cdn.almayadeen.tv/images/logo/new-logo-small.png",الميادين
+        https://mdnlv.cdn.octivid.com/almdn/smil:mpegts.stream.smil/playlist.m3u8
+
+        #EXTINF:-1 tvg-logo="https://i.ibb.co/5KW5f2K/france24ar.png",فرنسا 24 عربي
+        https://live.france24.com/hls/live/2037222/F24_AR_HI_HLS/master_5000.m3u8
+
+        #EXTINF:-1 tvg-logo="https://i.ibb.co/yRc4rDX/bbcar.png",بي بي سي عربي
+        https://vs-cmaf-pushb-ww-live.akamaized.net/x=4/i=urn:bbc:pips:service:bbc_arabic_tv/pc_hd_abr_v2.mpd
+
+        #EXTINF:-1 tvg-logo="https://i.ibb.co/QPP13X6/rtar.jpg",روسيا اليوم
+        https://rt-arb.rttv.com/live/rtarab/playlist.m3u8
+
+        #EXTINF:-1 tvg-logo="https://i.ibb.co/Fmvtnr7/dw-ar.png",DW عربية
+        https://dwamdstream103.akamaized.net/hls/live/2015526/dwstream103/index.m3u8
+
+        #EXTINF:-1 tvg-logo="https://aloula.faulio.com/storage/mediagallery/11/78/small_3b55efbef523c3a6d6e45d8c5a2d28b86bdf4117.png",الإخبارية السعودية
+        https://shd-gcp-live.edgenextcdn.net/live/bitmovin-al-ekhbaria/297b3ef1cd0633ad9cfba7473a686a06/index.m3u8
+        `;
+
+        // --- 2. تحليل وتشغيل القنوات ---
+        function parseM3U(data) {
+            const lines = data.split('\n');
+            const channels = [];
+            let currentChannel = {};
+
+            lines.forEach(line => {
+                line = line.trim();
+                if (!line) return;
+
+                if (line.startsWith('#EXTINF:')) {
+                    const infoParts = line.split(',');
+                    const name = infoParts[infoParts.length - 1].trim();
+                    const logoMatch = line.match(/tvg-logo="([^"]*)"/);
+                    const logo = logoMatch ? logoMatch[1] : 'https://picsum.photos/seed/tv/50/35.jpg';
+                    currentChannel = { name, logo };
+                } else if (!line.startsWith('#')) {
+                    if (currentChannel.name) {
+                        currentChannel.url = line;
+                        channels.push(currentChannel);
+                        currentChannel = {};
+                    }
+                }
+            });
+            return channels;
+        }
+
+        const video = document.getElementById('videoPlayer');
+        const channelsContainer = document.getElementById('channelsContainer');
+        const hls = new Hls();
+
+        function loadChannel(url) {
+            if (Hls.isSupported()) {
+                hls.loadSource(url);
+                hls.attachMedia(video);
+                hls.on(Hls.Events.MANIFEST_PARSED, () => video.play().catch(e => {}));
+            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                video.src = url;
+                video.play();
+            }
+        }
+
+        const channelsList = parseM3U(m3uData);
+
+        channelsList.forEach((channel, index) => {
+            const div = document.createElement('div');
+            div.className = 'channel-item';
+            if (index === 0) div.classList.add('active');
+
+            div.innerHTML = `
+                <img src="${channel.logo}" class="channel-logo" onerror="this.src='https://picsum.photos/seed/tv/50/35.jpg'">
+                <div class="channel-name">${channel.name}</div>
+            `;
+
+            div.addEventListener('click', () => {
+                document.querySelectorAll('.channel-item').forEach(el => el.classList.remove('active'));
+                div.classList.add('active');
+                loadChannel(channel.url);
+            });
+
+            channelsContainer.appendChild(div);
+        });
+
+        if (channelsList.length > 0) loadChannel(channelsList[0].url);
+
+        // --- 3. نظام RSS ---
+        const rssSources = [
+            { name: 'الجزيرة', url: 'https://www.aljazeera.com/xml/rss/all.xml' },
+            { name: 'سكاي نيوز', url: 'https://www.skynewsarabia.com/web/rss/rss.xml' },
+            { name: 'العربية', url: 'https://www.alarabiya.net/rss/rss.xml' }
+        ];
+
+        const proxyUrl = 'https://api.allorigins.win/get?url=';
+
+        async function fetchRSSFeeds() {
+            const container = document.getElementById('rssContainer');
+            let allNews = [];
+
+            const promises = rssSources.map(async (source) => {
+                try {
+                    const response = await fetch(proxyUrl + encodeURIComponent(source.url));
+                    const data = await response.json();
+                    const parser = new DOMParser();
+                    const xml = parser.parseFromString(data.contents, "text/xml");
+                    const items = Array.from(xml.querySelectorAll("item")).slice(0, 5);
+                    
+                    return items.map(item => ({
+                        title: item.querySelector("title").textContent,
+                        link: item.querySelector("link").textContent,
+                        date: item.querySelector("pubDate") ? item.querySelector("pubDate").textContent.substring(5, 16) : 'الآن',
+                        source: source.name
+                    }));
+                } catch (err) { return []; }
+            });
+
+            const results = await Promise.all(promises);
+            allNews = results.flat();
+
+            if (allNews.length === 0) {
+                container.innerHTML = '<div style="grid-column: 1/-1; text-align:center; padding:20px;">تعذر الاتصال بالخوادم الإخبارية حالياً.</div>';
+                return;
+            }
+
+            let htmlContent = '';
+            allNews.forEach(news => {
+                htmlContent += `
+                    <div class="rss-card">
+                        <span class="rss-source-tag">${news.source}</span>
+                        <h3>${news.title}</h3>
+                        <a href="${news.link}" target="_blank">تابع القراءة &larr;</a>
+                        <div class="rss-meta">🕒 ${news.date}</div>
+                    </div>
+                `;
+            });
+            container.innerHTML = htmlContent;
+        }
+
+        fetchRSSFeeds();
+
+        // --- 4. الشريط العاجل ---
+        const tickerData = [
+            "عاجل: حمزة من قلب الحدث - حمل التطبيق الجديد الآن.",
+            "اقتصاد: مؤشرات الأسواق العالمية تشهد تحسناً ملحوظاً.",
+            "تكنولوجيا: ابتكارات جديدة في مجال الواقع الافتراضي.",
+            "رياضة: الاستعدادات تشتد لبطولات الموسم القادم.",
+            "بيئة: مبادرات عالمية للحفاظ على المناخ والطبيعة."
+        ];
+        document.getElementById('tickerText').innerText = tickerData.join("     •✦•     ");
+        
+        document.getElementById('currentDate').textContent = new Date().toLocaleDateString('ar-EG', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+
+    </script>
+</body>
+</html>
+```
